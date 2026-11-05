@@ -112,8 +112,9 @@ try {
     const m = await browser.newContext({ viewport: { width: 375, height: 700 } });
     const mp = await m.newPage();
     for (const h of ['#/', '#/journal', '#/new', '#/calibration']) {
-      await mp.goto(url + h); await mp.waitForTimeout(150);
-      assert.ok(await mp.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'overflow on ' + h);
+      await mp.goto(url + h); await mp.waitForLoadState('networkidle'); await mp.waitForTimeout(250);
+      const over = await mp.evaluate(() => [...document.querySelectorAll('body *')].filter((e) => e.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 5).map((e) => `${e.tagName.toLowerCase()}.${e.className || ''}`));
+      assert.ok(await mp.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `overflow on ${h}: ${over.join(', ')}`);
     }
     await mp.goto(url + '#/'); await mp.screenshot({ path: 'e2e/shots/mobile.png' });
     await m.close();

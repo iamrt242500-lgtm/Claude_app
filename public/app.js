@@ -229,8 +229,8 @@ async function viewCalibration() {
     h('div', { class: 'grid' }, stat(s.reviewed, 'Reviewed'), stat(fmtPct(s.avgConfidence), 'Avg confidence'), stat(fmtPct(s.hitRate), 'Actual hit rate'), stat(s.brier, 'Brier score')),
     h('section', { class: 'card' }, h('p', { id: 'verdict' }, h('strong', {}, verdict)), chart, h('p', { class: 'small muted' }, 'Bars: actual hit rate (partly right counts as half). Dashed line: perfect calibration.')),
     h('section', { class: 'card' }, h('h2', {}, 'By confidence bucket'),
-      h('table', {}, h('thead', {}, h('tr', {}, ['Confidence', 'Decisions', 'Avg stated', 'Actual hit rate'].map((c) => h('th', { scope: 'col' }, c)))),
-        h('tbody', {}, s.buckets.map((b) => h('tr', {}, h('td', {}, b.range + '%'), h('td', {}, String(b.count)), h('td', {}, fmtPct(b.avgConfidence)), h('td', {}, fmtPct(b.hitRate))))))));
+      h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ['Confidence', 'Decisions', 'Avg stated', 'Actual hit rate'].map((c) => h('th', { scope: 'col' }, c)))),
+        h('tbody', {}, s.buckets.map((b) => h('tr', {}, h('td', {}, b.range + '%'), h('td', {}, String(b.count)), h('td', {}, fmtPct(b.avgConfidence)), h('td', {}, fmtPct(b.hitRate)))))))));
 }
 
 /* ---------- router ---------- */

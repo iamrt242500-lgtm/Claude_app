@@ -59,3 +59,4 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{text-align:left
 .sample{background:var(--accent);color:#1f2a27;padding:.1rem .5rem;border-radius:99px;font-size:.75rem;font-weight:700}
 dialog{border:1px solid var(--line);border-radius:var(--r);background:var(--card);color:var(--ink);max-width:460px;width:calc(100% - 2rem)}
 dialog::backdrop{background:#0006}
+.tablewrap{overflow-x:auto}.grid>*,.card{min-width:0}
