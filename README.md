@@ -39,6 +39,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/subtrack`](apps/subtrack) — subscription tracker with month-end-safe renewals, monthly/yearly cost and savings from cancellations
 > - [`apps/sprintly`](apps/sprintly) — sprint burndown with ideal line, scope-change tracking, velocity and finish-date forecast
 > - [`apps/gearlog`](apps/gearlog) — vehicle logbook: full-tank fuel economy, cost per km and km/time-based service reminders
+> - [`apps/bloomwatch`](apps/bloomwatch) — plant watering schedule with seasonal (and hemisphere-aware) intervals and adherence
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
