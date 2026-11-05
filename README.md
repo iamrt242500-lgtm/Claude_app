@@ -30,6 +30,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/lexi`](apps/lexi) — daily five-letter word game; the server scores guesses and never exposes the answer
 > - [`apps/moodlog`](apps/moodlog) — mood/energy journal with correlations, tag effects and weekday patterns
 > - [`apps/gridlock`](apps/gridlock) — Sudoku with unique-solution generation, conflict highlighting, notes, hints and best times
+> - [`apps/ledgerly`](apps/ledgerly) — double-entry bookkeeping with immutable journal, voids, trial balance and financial statements
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
