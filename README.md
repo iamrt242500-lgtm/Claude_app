@@ -10,6 +10,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/cronwise`](apps/cronwise) — cron expression explainer & schedule keeper
 > - [`apps/invoicely`](apps/invoicely) — invoices & clients for freelancers
 > - [`apps/boardwalk`](apps/boardwalk) — kanban boards with drag and drop
+> - [`apps/streakline`](apps/streakline) — habit tracker with schedule-aware streaks
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
