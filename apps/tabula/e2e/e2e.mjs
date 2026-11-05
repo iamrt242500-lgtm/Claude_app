@@ -28,7 +28,7 @@ try {
   });
   await run('upload CSV file, see profile with types and histogram', async () => {
     await page.fill('#name', ''); await page.setInputFiles('#file', file);
-    assert.equal(await page.inputValue('#name'), 'sales_e2e');
+    await page.waitForFunction(() => document.querySelector('#name').value === 'sales_e2e' && document.querySelector('#csv').value.length > 50);   // file is read asynchronously
     await page.click('#upload');
     await page.getByRole('heading', { name: 'sales_e2e' }).waitFor();
     await page.getByText('60 rows · 3 columns').waitFor();
