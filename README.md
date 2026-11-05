@@ -38,6 +38,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/pagewise`](apps/pagewise) — reading tracker with finish-date estimates, streaks and yearly goal pacing
 > - [`apps/subtrack`](apps/subtrack) — subscription tracker with month-end-safe renewals, monthly/yearly cost and savings from cancellations
 > - [`apps/sprintly`](apps/sprintly) — sprint burndown with ideal line, scope-change tracking, velocity and finish-date forecast
+> - [`apps/gearlog`](apps/gearlog) — vehicle logbook: full-tank fuel economy, cost per km and km/time-based service reminders
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
