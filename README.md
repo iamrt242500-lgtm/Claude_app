@@ -21,6 +21,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/overlap`](apps/overlap) — DST-aware meeting-time finder across time zones
 > - [`apps/pollbox`](apps/pollbox) — shareable polls with admin links and results policies
 > - [`apps/sketchbook`](apps/sketchbook) — vector sketchpad with undo/redo and PNG/SVG export
+> - [`apps/diffly`](apps/diffly) — text diff (Myers) with word highlights and unified patches
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
