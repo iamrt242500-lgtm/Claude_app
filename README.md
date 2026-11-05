@@ -35,6 +35,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/tallyho`](apps/tallyho) — knockout brackets (with byes) and round-robin leagues with head-to-head tiebreaks
 > - [`apps/stockpile`](apps/stockpile) — inventory with FIFO cost layers, COGS vs shrinkage, valuation and reorder alerts
 > - [`apps/chorewheel`](apps/chorewheel) — household chores assigned by a fairness rule (load, recency, availability) with a points board
+> - [`apps/pagewise`](apps/pagewise) — reading tracker with finish-date estimates, streaks and yearly goal pacing
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
