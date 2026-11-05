@@ -39,7 +39,7 @@ try {
     await page.locator('#range').selectOption('7'); await page.waitForFunction(() => location.hash.includes('days=7')); await page.waitForFunction(() => /Last 7 days/.test(document.getElementById('range').selectedOptions[0].textContent)); assert.match(await text('#summary'), /\d+\/7/);
   });
   await run('delete an entry', async () => {
-    await page.goto(url + '#/history'); const before = await page.locator('[data-day]').count(); await page.locator('[data-day="2026-03-15"] button').click(); await page.waitForFunction((n) => document.querySelectorAll('[data-day]').length === n, before - 1);
+    await page.goto(url + '#/history'); await page.locator('[data-day="2026-03-15"]').waitFor(); const before = await page.locator('[data-day]').count(); await page.locator('[data-day="2026-03-15"] button').click(); await page.waitForFunction((n) => document.querySelectorAll('[data-day]').length === n, before - 1);
   });
   await run('mobile: no horizontal overflow on any screen', async () => {
     await page.setViewportSize({ width: 360, height: 700 }); for (const h of ['#/', '#/history', '#/insights']) { await page.goto(url + h); await page.waitForTimeout(200); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'overflow on ' + h); }
