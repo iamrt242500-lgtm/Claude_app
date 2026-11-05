@@ -16,6 +16,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/linkpad`](apps/linkpad) — Markdown notes with wikilinks & backlinks
 > - [`apps/shortly`](apps/shortly) — link shortener with click analytics
 > - [`apps/focusly`](apps/focusly) — Pomodoro timer with server-side state & stats
+> - [`apps/pennywise`](apps/pennywise) — monthly budget tracker with bank-CSV import
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
