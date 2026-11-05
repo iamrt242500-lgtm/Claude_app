@@ -48,6 +48,7 @@ async function viewEditor(id) {
 }
 async function viewRecipe(id) {
   let servings = null, sys = 'original'; const body = h('div');
+  const planPick = { day: localToday(), meal: 'dinner' };   // survives re-renders (servings/units change, late responses)
   let seq = 0, lastRecipe = null;
   // The local `servings` is the source of truth; responses only supply the rendered text. Stale responses (older clicks) are dropped.
   const load = async () => {
@@ -64,7 +65,7 @@ async function viewRecipe(id) {
         h('h2', {}, 'Ingredients'), h('ul', { class: 'ing', id: 'ingredients-list' }, r.view.ingredients.map((i) => h('li', { class: i.scaled && (r.view.factor !== 1 || sys !== 'original') ? 'changed' : '' }, i.scaled ? [h('strong', {}, i.qtyText), ' ', i.name] : i.text)))),
       r.steps ? h('div', { class: 'card' }, h('h2', {}, 'Steps'), h('p', { class: 'pre' }, r.steps)) : null,
       h('div', { class: 'card' }, h('h2', {}, 'Add to meal plan'), h('form', { class: 'row', novalidate: true, onsubmit: async (e) => { e.preventDefault(); const fd = Object.fromEntries(new FormData(e.target)); try { await api('/plan', { method: 'POST', body: { day: fd.day, meal: fd.meal, recipeId: Number(id), servings } }); toast(`Planned for ${dayLabel(fd.day)}`); } catch (x) { $('#plan-err').textContent = x.details ? Object.values(x.details).join(' · ') : x.message; } } },
-        h('input', { type: 'date', name: 'day', id: 'plan-day', value: localToday(), 'aria-label': 'Day' }), h('select', { name: 'meal', id: 'plan-meal', 'aria-label': 'Meal' }, ['breakfast', 'lunch', 'dinner', 'snack'].map((m) => h('option', { value: m, selected: m === 'dinner' }, m[0].toUpperCase() + m.slice(1)))), h('button', { class: 'btn primary', id: 'plan-add' }, `Add (${servings} servings)`), h('span', { class: 'err', id: 'plan-err', role: 'alert' }))));
+        h('input', { type: 'date', name: 'day', id: 'plan-day', value: planPick.day, 'aria-label': 'Day', onchange: (e) => { planPick.day = e.target.value; } }), h('select', { name: 'meal', id: 'plan-meal', 'aria-label': 'Meal', onchange: (e) => { planPick.meal = e.target.value; } }, ['breakfast', 'lunch', 'dinner', 'snack'].map((m) => h('option', { value: m, selected: m === planPick.meal }, m[0].toUpperCase() + m.slice(1)))), h('button', { class: 'btn primary', id: 'plan-add' }, `Add (${servings} servings)`), h('span', { class: 'err', id: 'plan-err', role: 'alert' }))));
   };
   render(body); await load();
 }

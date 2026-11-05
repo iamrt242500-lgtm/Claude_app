@@ -50,10 +50,19 @@ try {
   });
   await run('meal plan from the recipe page (servings carried over) and from the week grid', async () => {
     await page.locator('[data-recipe="Pancakes"] a').first().click(); await page.getByRole('heading', { name: 'Pancakes', exact: true }).waitFor(); for (let i = 0; i < 4; i++) await page.click('[aria-label="More servings"]');
-    await page.fill('#plan-day', today); await page.selectOption('#plan-meal', 'breakfast'); await page.getByRole('button', { name: 'Add (8 servings)' }).click(); await page.getByText(/Planned for/).waitFor();
+    await page.fill('#plan-day', today); await page.selectOption('#plan-meal', 'breakfast');
+    await page.waitForTimeout(400);   // let any in-flight re-render from the servings clicks land: the chosen day/meal must survive it
+    assert.equal(await page.inputValue('#plan-meal'), 'breakfast', 'plan form selections survive re-renders'); await page.getByRole('button', { name: 'Add (8 servings)' }).click(); await page.getByText(/Planned for/).waitFor();
     await page.goto(url + '#/plan'); const day = page.locator(`[data-day="${today}"]`); await day.locator('[data-entry="Pancakes"]').getByText('8 serv.').waitFor();
     await day.locator('select[name="recipeId"]').selectOption({ label: 'Omelette' }); await day.locator('select[name="meal"]').selectOption('lunch'); await day.getByRole('button', { name: 'Add', exact: true }).click(); await day.locator('[data-entry="Omelette"]').getByText('2 serv.').waitFor();
     assert.equal(await day.locator('.entry .meal').first().textContent(), 'breakfast', 'entries are ordered breakfast → lunch');
+  });
+  await run('regression: a slow response after changing servings must not reset the plan form the user already filled in', async () => {
+    await page.goto(url + '#/'); await page.locator('[data-recipe="Omelette"] a').first().click(); await page.getByRole('heading', { name: 'Omelette', exact: true }).waitFor();
+    await page.route('**/api/recipes/*', async (r) => { await new Promise((res) => setTimeout(res, 700)); await r.continue(); });
+    await page.click('[aria-label="More servings"]'); await page.selectOption('#plan-meal', 'snack'); await page.fill('#plan-day', today);   // chosen while the servings response is still in flight
+    await page.waitForTimeout(1200); assert.equal(await page.inputValue('#plan-meal'), 'snack', 'meal choice survived the late re-render'); assert.equal(await page.inputValue('#plan-day'), today);
+    await page.unroute('**/api/recipes/*');
   });
   await run('shopping list merges ingredients across recipes and units; tick items; persists', async () => {
     await page.goto(url + '#/shopping'); await page.locator('#shop').waitFor(); const q = async (name) => page.locator(`[data-item="${name}"] .q`).textContent();
