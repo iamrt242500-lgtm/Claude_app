@@ -19,6 +19,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/pennywise`](apps/pennywise) — monthly budget tracker with bank-CSV import
 > - [`apps/quizzly`](apps/quizzly) — quiz maker & taker with server-side grading
 > - [`apps/overlap`](apps/overlap) — DST-aware meeting-time finder across time zones
+> - [`apps/pollbox`](apps/pollbox) — shareable polls with admin links and results policies
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
