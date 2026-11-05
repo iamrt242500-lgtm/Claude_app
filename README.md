@@ -13,6 +13,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/streakline`](apps/streakline) — habit tracker with schedule-aware streaks
 > - [`apps/snipbox`](apps/snipbox) — code snippet library with full-text search
 > - [`apps/evenly`](apps/evenly) — group expense splitting & settle-up
+> - [`apps/linkpad`](apps/linkpad) — Markdown notes with wikilinks & backlinks
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)

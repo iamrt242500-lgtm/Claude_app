@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linkpad — linked notes</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Cpath d='M13 19l6-6M11 15l-2 2a3.5 3.5 0 005 5l2-2M21 17l2-2a3.5 3.5 0 00-5-5l-2 2' stroke='%23fff' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top"><a class="brand" href="#/"><span class="logo" aria-hidden="true"></span>Linkpad</a>
+    <input type="search" id="search" aria-label="Search notes" placeholder="Search notes…" autocomplete="off">
+    <a class="btn primary" href="#/new" id="new-note">+ New note</a></header>
+  <div class="shell">
+    <nav class="side" aria-label="Notes"><ul class="list" id="note-list"></ul><p class="small muted" id="list-status"></p></nav>
+    <main id="main" tabindex="-1"></main>
+  </div>
+  <div id="toasts" role="status" aria-live="polite"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
