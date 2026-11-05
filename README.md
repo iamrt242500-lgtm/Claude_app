@@ -25,6 +25,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/pantry`](apps/pantry) — recipes, weekly meal plan and merged shopping list
 > - [`apps/typo`](apps/typo) — typing practice with server-verified WPM stats
 > - [`apps/followup`](apps/followup) — paste meeting notes, get owners + resolved due dates as a task board
+> - [`apps/contrastly`](apps/contrastly) — WCAG contrast checker with nearest-accessible-colour suggestions and palette matrices
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
