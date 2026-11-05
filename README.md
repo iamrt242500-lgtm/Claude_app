@@ -8,6 +8,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/recall`](apps/recall) — spaced-repetition flashcards (SM-2)
 > - [`apps/tabula`](apps/tabula) — CSV profiler & aggregate charts
 > - [`apps/cronwise`](apps/cronwise) — cron expression explainer & schedule keeper
+> - [`apps/invoicely`](apps/invoicely) — invoices & clients for freelancers
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
