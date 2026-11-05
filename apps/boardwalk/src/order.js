@@ -12,4 +12,4 @@ export function normalizeLabels(labels) {
   for (const l of arr) { const v = String(l).trim().toLowerCase().slice(0, 20); if (v && !out.includes(v)) out.push(v); }
   return out.slice(0, 6);
 }
-export const isDate = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s));
+export const isDate = (s) => { if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return false; const t = Date.parse(s + 'T00:00:00Z'); return !Number.isNaN(t) && new Date(t).toISOString().slice(0, 10) === s; };

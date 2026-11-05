@@ -15,4 +15,4 @@ test('normalizeLabels', () => {
   assert.deepEqual(normalizeLabels(' Bug, bug ,UI,,'), ['bug', 'ui']);
   assert.equal(normalizeLabels('a,b,c,d,e,f,g,h').length, 6); assert.deepEqual(normalizeLabels(undefined), []);
 });
-test('isDate', () => { assert.ok(isDate('2026-02-28')); assert.ok(!isDate('2026-13-01')); assert.ok(!isDate('tomorrow')); assert.ok(!isDate(null)); });
+test('isDate', () => { assert.ok(isDate('2026-02-28')); assert.ok(!isDate('2026-13-01')); assert.ok(!isDate('2026-02-30')); assert.ok(!isDate('2026-04-31')); assert.ok(isDate('2024-02-29')); assert.ok(!isDate('2026-02-29')); assert.ok(!isDate('tomorrow')); assert.ok(!isDate(null)); });

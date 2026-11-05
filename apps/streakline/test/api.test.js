@@ -24,7 +24,7 @@ test('habit lifecycle, check-in idempotency, streaks and backfill', async () => 
 });
 test('check-in validation: future, malformed, impossible date', async () => {
   const h = await (await call('POST', '/habits', { name: 'V', schedule: [1] })).json();
-  for (const [d, re] of [['2026-03-10', /future/], ['2026-02-30', /Invalid date/], ['yesterday', /Invalid date/], ['1999-01-01', /too far/]]) {
+  for (const [d, re] of [['2026-03-10', /future/], ['2026-02-30', /Invalid date/], ['2026-13-01', /Invalid date/], ['2026-00-00', /Invalid date/], ['yesterday', /Invalid date/], ['1999-01-01', /too far/]]) {
     const r = await call('PUT', `/habits/${h.id}/checkins/${d}`); assert.equal(r.status, 422, d); assert.match((await r.json()).details.date, re);
   }
 });

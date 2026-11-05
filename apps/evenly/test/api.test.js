@@ -39,7 +39,7 @@ test('exact, percent and shares splits; bad splits rejected with clear messages'
 });
 test('expense validation, edit and delete update balances', async () => {
   const g = await mkGroup(['P', 'Q']); const [p, q] = g.members.map((m) => m.id);
-  for (const [b, key] of [[{ description: '', amount: '5', paidBy: p, split: { type: 'equal', members: [p] } }, 'description'], [{ description: 'x', amount: '0', paidBy: p, split: { type: 'equal', members: [p] } }, 'amount'], [{ description: 'x', amount: '1.999', paidBy: p, split: { type: 'equal', members: [p] } }, 'amount'], [{ description: 'x', amount: '5', paidBy: 999, split: { type: 'equal', members: [p] } }, 'paidBy'], [{ description: 'x', amount: '5', day: '2026-02-30', paidBy: p, split: { type: 'equal', members: [p] } }, 'day']]) {
+  for (const [b, key] of [[{ description: '', amount: '5', paidBy: p, split: { type: 'equal', members: [p] } }, 'description'], [{ description: 'x', amount: '0', paidBy: p, split: { type: 'equal', members: [p] } }, 'amount'], [{ description: 'x', amount: '1.999', paidBy: p, split: { type: 'equal', members: [p] } }, 'amount'], [{ description: 'x', amount: '5', paidBy: 999, split: { type: 'equal', members: [p] } }, 'paidBy'], [{ description: 'x', amount: '5', day: '2026-02-30', paidBy: p, split: { type: 'equal', members: [p] } }, 'day'], [{ description: 'x', amount: '5', day: '2026-13-01', paidBy: p, split: { type: 'equal', members: [p] } }, 'day']]) {
     const r = await call('POST', `/groups/${g.id}/expenses`, b); assert.equal(r.status, 422); assert.ok((await r.json()).details[key], key);
   }
   let d = await (await call('POST', `/groups/${g.id}/expenses`, { description: 'Taxi', amount: '20', paidBy: p, split: { type: 'equal', members: [p, q] } })).json();

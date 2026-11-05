@@ -20,7 +20,7 @@ test('formatMoney', () => { assert.equal(formatMoney(123456, 'USD'), '$1,234.56'
 test('validateInvoice', () => {
   const ok = { clientId: 1, issueDate: '2026-01-01', dueDate: '2026-01-31', currency: 'USD', taxPercent: 8.25, items: [{ description: 'Work', qty: 2, unitPrice: '10.50' }] };
   const r = validateInvoice(ok); assert.equal(r.value.taxBp, 825); assert.equal(r.value.items[0].unitCents, 1050);
-  assert.ok(validateInvoice({ ...ok, dueDate: '2025-12-31' }).errors.dueDate);
+  assert.ok(validateInvoice({ ...ok, dueDate: '2025-12-31' }).errors.dueDate); assert.ok(validateInvoice({ ...ok, dueDate: '2026-02-30' }).errors.dueDate, 'impossible dates rejected'); assert.ok(validateInvoice({ ...ok, issueDate: '2026-13-01' }).errors.issueDate);
   assert.ok(validateInvoice({ ...ok, items: [] }).errors.items);
   assert.match(validateInvoice({ ...ok, items: [{ description: 'x', qty: 0, unitPrice: '1' }] }).errors.items, /Line 1: quantity/);
   assert.match(validateInvoice({ ...ok, items: [{ description: 'x', qty: 1, unitPrice: 'free' }] }).errors.items, /unit price/);

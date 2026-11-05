@@ -12,7 +12,7 @@ const SEC = { 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY', 'R
   'Content-Security-Policy': "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-ancestors 'none'" };
 class HttpError extends Error { constructor(s, m, d) { super(m); this.status = s; this.details = d; } }
 const CURRENCIES = ['USD', 'EUR', 'GBP'], MAX_MEMBERS = 20, MAX_AMOUNT = 100_000_000_00;
-const isDate = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && new Date(s + 'T00:00:00Z').toISOString().slice(0, 10) === s;
+const isDate = (s) => { if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return false; const t = Date.parse(s + 'T00:00:00Z'); return !Number.isNaN(t) && new Date(t).toISOString().slice(0, 10) === s; };
 
 function openDb(path) {
   if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });

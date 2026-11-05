@@ -7,7 +7,7 @@ const S = (...d) => new Set(d);
 // 2026-03-09 is a Monday.
 test('date helpers', () => {
   assert.equal(weekday('2026-03-09'), 1); assert.equal(addDays('2026-03-01', -1), '2026-02-28'); assert.equal(addDays('2024-02-28', 1), '2024-02-29');
-  assert.ok(isDate('2026-02-28')); assert.ok(!isDate('2026-02-30')); assert.ok(!isDate('2026-2-3')); assert.ok(!isDate(null));
+  assert.ok(isDate('2026-02-28')); assert.ok(!isDate('2026-02-30')); assert.ok(!isDate('2026-13-01')); assert.ok(!isDate('2026-00-10')); assert.ok(!isDate('2026-04-31')); assert.ok(!isDate('0000-00-00')); assert.ok(!isDate('2026-2-3')); assert.ok(!isDate(null));
 });
 test('daily habit: consecutive days, today is a grace day', () => {
   assert.equal(currentStreak(ALL, S('2026-03-07', '2026-03-08', '2026-03-09'), '2026-03-01', '2026-03-09'), 3);

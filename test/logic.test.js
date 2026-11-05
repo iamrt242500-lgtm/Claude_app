@@ -8,6 +8,10 @@ test('validateDecision accepts valid input and normalizes tags', () => {
   const r = validateDecision(ok);
   assert.deepEqual(r.value.tags, ['a', 'b']);
 });
+test('validateDecision rejects impossible calendar dates', () => {
+  const base = { title: 'T', prediction: 'P', confidence: 70, decidedAt: '2026-01-01', reviewOn: '2026-02-01' };
+  for (const d of ['2026-02-30', '2026-13-01', '2026-04-31']) assert.ok(validateDecision({ ...base, reviewOn: d }).errors.reviewOn, d);
+});
 test('validateDecision rejects bad input', () => {
   const r = validateDecision({ title: ' ', confidence: 20, reviewOn: 'x' });
   assert.ok(r.errors.title && r.errors.prediction && r.errors.confidence && r.errors.reviewOn);
