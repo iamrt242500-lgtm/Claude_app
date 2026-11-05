@@ -33,6 +33,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/ledgerly`](apps/ledgerly) — double-entry bookkeeping with immutable journal, voids, trial balance and financial statements
 > - [`apps/rosterly`](apps/rosterly) — weekly shift scheduler that flags overlaps, rest, weekly-hour, time-off and availability conflicts
 > - [`apps/tallyho`](apps/tallyho) — knockout brackets (with byes) and round-robin leagues with head-to-head tiebreaks
+> - [`apps/stockpile`](apps/stockpile) — inventory with FIFO cost layers, COGS vs shrinkage, valuation and reorder alerts
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
