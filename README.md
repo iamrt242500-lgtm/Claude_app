@@ -1,0 +1,37 @@
+# Hindsight — decision journal with calibration analytics
+
+Log a decision, your prediction, and how confident you are. When the review date arrives, record what actually happened. Hindsight then shows whether you are **over- or under-confident** (calibration chart + Brier score) so your future judgment improves.
+
+**Repository:** https://github.com/iamrt242500-lgtm/Claude_app · **Live URL:** none — not deployed yet (see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)).
+
+## Features
+- Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
+- "Due for review" queue; review as hit / partly / miss with notes; reopen
+- Journal with search, status and tag filters; CSV / JSON export (CSV is formula-injection safe)
+- Calibration page: avg confidence vs hit rate, Brier score, per-bucket table and SVG chart, verdict (≥ 5 reviews)
+- Responsive, keyboard accessible, light/dark; validation, network and server error handling
+- Optional password protection (HTTP Basic) via `ACCESS_PASSWORD`
+
+## Stack
+Node 22 (built-in `node:http` + `node:sqlite`, **zero runtime dependencies**) · SQLite (WAL) · vanilla JS SPA · `node:test` · Playwright (dev only).
+
+## Run
+```bash
+npm install        # only dev dependency: playwright
+npm start          # http://localhost:3000
+```
+| Env var | Default | Purpose |
+|---|---|---|
+| `PORT` | 3000 | HTTP port |
+| `DB_PATH` | `./data/hindsight.db` | SQLite file (mount a persistent volume) |
+| `ACCESS_PASSWORD` | empty | if set, Basic auth, user `hindsight` |
+
+## Test
+```bash
+npm run check      # syntax check
+npm test           # unit + API integration (13 tests)
+CHROMIUM_PATH=/opt/pw-browsers/chromium npm run test:e2e   # browser E2E (omit CHROMIUM_PATH if `npx playwright install chromium` was run)
+```
+
+## Docs
+[Ideation](docs/IDEATION.md) · [PRD](docs/PRD.md) · [Architecture, API & DB](docs/ARCHITECTURE.md) · [Test report](docs/TEST_REPORT.md) · [Deployment](docs/DEPLOYMENT.md) · [Roadmap](docs/ROADMAP.md)

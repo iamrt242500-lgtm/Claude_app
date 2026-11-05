@@ -1,0 +1,20 @@
+{
+  "name": "hindsight",
+  "version": "1.0.0",
+  "description": "Decision journal with calibration analytics",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/db.js && node --check src/logic.js && node --check public/app.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:e2e": "node e2e/e2e.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}
