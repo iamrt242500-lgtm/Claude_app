@@ -4,6 +4,9 @@ Log a decision, your prediction, and how confident you are. When the review date
 
 **Repository:** https://github.com/iamrt242500-lgtm/Claude_app · **Live URL:** none — not deployed yet (see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)).
 
+> This repository holds several small apps. **Hindsight** (this README) lives at the repo root; others live in `apps/`:
+> - [`apps/recall`](apps/recall) — spaced-repetition flashcards (SM-2)
+
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
 - "Due for review" queue; review as hit / partly / miss with notes; reopen
