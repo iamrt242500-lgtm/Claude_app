@@ -1,0 +1,9 @@
+{
+  "name": "cronwise", "version": "1.0.0", "private": true, "type": "module", "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node src/server.js",
+    "check": "node --check src/server.js && node --check src/cron.js && node --check public/app.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:e2e": "node e2e/e2e.mjs"
+  }
+}
