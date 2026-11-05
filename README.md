@@ -22,6 +22,9 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/pollbox`](apps/pollbox) — shareable polls with admin links and results policies
 > - [`apps/sketchbook`](apps/sketchbook) — vector sketchpad with undo/redo and PNG/SVG export
 > - [`apps/diffly`](apps/diffly) — text diff (Myers) with word highlights and unified patches
+> - [`apps/pantry`](apps/pantry) — recipes, weekly meal plan and merged shopping list
+>
+> Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)

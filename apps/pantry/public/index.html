@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pantry — recipes, meal plan, shopping list</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316a34a'/%3E%3Cpath d='M10 22c0-7 5-11 12-11 0 7-4 12-12 11zM10 22l7-7' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top"><a class="brand" href="#/"><span class="logo" aria-hidden="true"></span>Pantry</a>
+    <nav aria-label="Main"><a href="#/" data-nav="recipes">Recipes</a><a href="#/plan" data-nav="plan">Meal plan</a><a href="#/shopping" data-nav="shopping">Shopping list</a></nav>
+    <a class="btn primary" href="#/new" id="new-recipe">+ New recipe</a></header>
+  <main id="main" tabindex="-1"></main>
+  <div id="toasts" role="status" aria-live="polite"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
