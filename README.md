@@ -26,6 +26,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/typo`](apps/typo) — typing practice with server-verified WPM stats
 > - [`apps/followup`](apps/followup) — paste meeting notes, get owners + resolved due dates as a task board
 > - [`apps/contrastly`](apps/contrastly) — WCAG contrast checker with nearest-accessible-colour suggestions and palette matrices
+> - [`apps/pacer`](apps/pacer) — running pace/time/distance calculator with splits, negative splits, Riegel predictions and goals
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
