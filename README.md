@@ -6,6 +6,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 
 > This repository holds several small apps. **Hindsight** (this README) lives at the repo root; others live in `apps/`:
 > - [`apps/recall`](apps/recall) — spaced-repetition flashcards (SM-2)
+> - [`apps/tabula`](apps/tabula) — CSV profiler & aggregate charts
 
 ## Features
 - Create / edit / delete decisions (title, context, choice, prediction, confidence 50–99%, dates, tags)
