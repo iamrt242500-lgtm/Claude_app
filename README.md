@@ -28,6 +28,7 @@ Log a decision, your prediction, and how confident you are. When the review date
 > - [`apps/contrastly`](apps/contrastly) — WCAG contrast checker with nearest-accessible-colour suggestions and palette matrices
 > - [`apps/pacer`](apps/pacer) — running pace/time/distance calculator with splits, negative splits, Riegel predictions and goals
 > - [`apps/lexi`](apps/lexi) — daily five-letter word game; the server scores guesses and never exposes the answer
+> - [`apps/moodlog`](apps/moodlog) — mood/energy journal with correlations, tag effects and weekday patterns
 >
 > Run every app's checks and unit/API tests at once with `scripts/test-all.sh` (add `--e2e` for the browser tests).
 
