@@ -134,7 +134,10 @@ async function viewClients() {
   draw();
 }
 
-async function route() {
+// Serialize navigations so a slow earlier render can never overwrite a later one.
+let routing = Promise.resolve();
+function route() { const p = routing.then(doRoute); routing = p.catch(() => {}); return p; }
+async function doRoute() {
   const hash = location.hash.slice(1) || '/'; let m;
   document.querySelectorAll('nav a').forEach((a) => { const k = a.dataset.nav, on = (k === 'home' && hash === '/') || (k === 'invoices' && hash.startsWith('/invoices')) || (k === 'clients' && hash === '/clients'); on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
   main.replaceChildren(h('p', { class: 'muted' }, 'Loading…'));

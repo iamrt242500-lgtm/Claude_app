@@ -79,7 +79,10 @@ async function viewHabit(id) {
   draw();
 }
 
-async function route() {
+// Serialize navigations so a slow earlier render can never overwrite a later one.
+let routing = Promise.resolve();
+function route() { const p = routing.then(doRoute); routing = p.catch(() => {}); return p; }
+async function doRoute() {
   const hash = location.hash.slice(1) || '/'; let m;
   render(h('p', { class: 'muted' }, 'Loading…'));
   try {

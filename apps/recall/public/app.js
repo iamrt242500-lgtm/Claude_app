@@ -123,7 +123,10 @@ async function viewStats() {
     s.days.length ? h('div', { class: 'card' }, h('h2', {}, 'Reviews per day'), chart) : h('div', { class: 'card empty' }, 'Study some cards to see your history.'));
 }
 
-async function route() {
+// Serialize navigations so a slow earlier render can never overwrite a later one.
+let routing = Promise.resolve();
+function route() { const p = routing.then(doRoute); routing = p.catch(() => {}); return p; }
+async function doRoute() {
   cleanup?.(); cleanup = null;
   const hash = location.hash.slice(1) || '/'; let m;
   document.querySelectorAll('nav a').forEach((a) => { const on = (a.dataset.nav === 'decks' && !hash.startsWith('/stats')) || (a.dataset.nav === 'stats' && hash === '/stats'); on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });

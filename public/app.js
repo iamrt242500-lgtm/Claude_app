@@ -234,7 +234,10 @@ async function viewCalibration() {
 }
 
 /* ---------- router ---------- */
-async function route() {
+// Serialize navigations so a slow earlier render can never overwrite a later one.
+let routing = Promise.resolve();
+function route() { const p = routing.then(doRoute); routing = p.catch(() => {}); return p; }
+async function doRoute() {
   const hash = location.hash.replace(/^#/, '') || '/';
   document.querySelectorAll('nav a').forEach((a) => {
     const k = a.dataset.nav, on = (k === 'home' && hash === '/') || (k === 'journal' && (hash === '/journal' || hash.startsWith('/d/'))) || (k === 'calibration' && hash === '/calibration');
