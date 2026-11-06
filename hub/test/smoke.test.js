@@ -27,7 +27,7 @@ test('the hub serves and isolates every app on one public port', async () => {
       assert.match(html,new RegExp(`/apps/${app.id}/(?:app\\.js|styles?\\.css)`),`${app.id} asset path`);
       const script=await fetch(base+app.url+'app.js');
       assert.equal(script.status,200,`${app.id} script`);
-      const css=html.match(new RegExp(`/apps/${app.id}/(styles?\\\\.css)`))?.[1];
+      const css=html.match(new RegExp(`/apps/${app.id}/(styles?\\.css)`))?.[1];
       assert.ok(css,`${app.id} stylesheet link`);
       assert.equal((await fetch(base+app.url+css)).status,200,`${app.id} stylesheet`);
       const health=await fetch(base+app.url+'api/health');
