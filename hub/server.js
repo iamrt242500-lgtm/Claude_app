@@ -55,6 +55,7 @@ async function proxy(req,res,id,relative) {
     const transform=/text\/html|javascript|text\/css/.test(type);
     const outHeaders={...r.headers};
     delete outHeaders['content-length']; delete outHeaders['content-encoding'];
+    if(transform) delete outHeaders['transfer-encoding'];
     if(outHeaders.location?.startsWith('/')) outHeaders.location=prefix+outHeaders.location;
     if(outHeaders['set-cookie']) outHeaders['set-cookie']=[].concat(outHeaders['set-cookie']).map(c=>c.replace(/Path=\//i,`Path=${prefix}/`));
     if(!transform){res.writeHead(r.statusCode || 502,outHeaders);r.pipe(res);return;}
