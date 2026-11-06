@@ -27,7 +27,7 @@ function start(id) {
   if (instances.has(id)) return instances.get(id);
   const pending=(async()=>{
     const path=id==='hindsight' ? './src/server.js' : `./apps/${id}/src/server.js`;
-    const { createApp }=await import(new URL(path, import.meta.url.replace('/hub/server.js','/')));
+    const { createApp }=await import(new URL('../'+path.slice(2), import.meta.url));
     mkdirSync(dataDir,{recursive:true});
     const {server,db}=createApp({dbPath:join(dataDir,`${id}.db`),password:id==='hindsight' ? '' : undefined});
     await new Promise((ok,fail)=>{ server.once('error',fail); server.listen(0,'127.0.0.1',ok); });
@@ -67,6 +67,14 @@ async function proxy(req,res,id,relative) {
   upstream.on('error',e=>{console.error(id,e);if(!res.headersSent) send(res,502,'앱을 열 수 없습니다.');else res.end();});
   req.pipe(upstream);
 }
+export async function closeApps() {
+  const started=await Promise.allSettled([...instances.values()]);
+  await Promise.all(started.filter(x=>x.status==='fulfilled').map(async ({value})=>{
+    await new Promise(resolve=>value.server.close(resolve));
+    value.db?.close?.();
+  }));
+  instances.clear();
+}
 export function createHub() {
   return createServer(async(req,res)=>{
     try {
@@ -91,5 +99,5 @@ export function createHub() {
 if(process.argv[1]===fileURLToPath(import.meta.url)){
   const server=createHub(), port=Number(process.env.PORT)||3000;
   server.listen(port,'0.0.0.0',()=>console.log(`App Hub listening on :${port}`));
-  for(const signal of ['SIGINT','SIGTERM']) process.on(signal,()=>server.close(()=>process.exit(0)));
+  for(const signal of ['SIGINT','SIGTERM']) process.on(signal,()=>server.close(async()=>{await closeApps();process.exit(0)}));
 }
