@@ -12,6 +12,11 @@ body.hub-app {
   --brand: #7049d8;
   --on: #fff;
   --focus: #e4a943;
+  --ok: #177a48;
+  --bad: #b52b42;
+  --warn: #966018;
+  --pos: #177a48;
+  --neg: #b52b42;
   --r: 16px;
   --hub-accent: #7049d8;
   min-height: 100vh;
@@ -85,6 +90,8 @@ body.hub-app > header {
 }
 body.hub-app > header .brand { color: var(--hub-accent); }
 body.hub-app > header nav a { font-weight:600; }
+body.hub-app .btn.primary, body.hub-app button.primary,
+body.hub-app > header nav a[aria-current=page] { color:#fff; }
 body.hub-app main { min-height: calc(100vh - 126px); padding-top: clamp(24px, 4vw, 38px); }
 body.hub-app main h1 {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
