@@ -36,11 +36,14 @@ function start(id) {
   instances.set(id,pending);
   return pending;
 }
-function rewrite(body,type,prefix) {
+function rewrite(body,type,prefix,id) {
   let s=body.toString('utf8');
   if(type.includes('text/html')) {
     s=s.replace(/((?:src|href|action)=["'])\/(?!\/)/gi,`$1${prefix}/`);
-    s=s.replace(/<\/body>/i,`<link rel="stylesheet" href="/hub/chrome.css"><a class="hub-return" href="/" aria-label="앱 허브로 돌아가기">◀ 앱 허브</a></body>`);
+    const app=apps.find(item=>item.id===id);
+    const bar=`<div id="hub-shell-bar" data-category="${app.category}"><a class="hub-shell-home" href="/" aria-label="모아플레이 홈"><span class="hub-shell-mark" aria-hidden="true">✦</span><span>모아플레이</span></a><span class="hub-shell-divider" aria-hidden="true"></span><span class="hub-shell-app"><span aria-hidden="true">${app.icon}</span> ${app.name}</span><a class="hub-shell-all" href="/">모든 앱 <span aria-hidden="true">↗</span></a></div>`;
+    s=s.replace(/<\/head>/i,`<link rel="stylesheet" href="/hub/chrome.css"></head>`);
+    s=s.replace(/<body>/i,`<body class="hub-app hub-category-${app.category}">${bar}`);
   } else if(type.includes('javascript')) {
     s=s.replace(/(['"`])\/(api(?=\/|['"`])|[a-zA-Z0-9_-]+\.js(?=['"`])|s\/)/g,(_,q,p)=>q+prefix+'/'+p);
   } else if(type.includes('text/css')) {
@@ -60,7 +63,7 @@ async function proxy(req,res,id,relative) {
     if(outHeaders['set-cookie']) outHeaders['set-cookie']=[].concat(outHeaders['set-cookie']).map(c=>c.replace(/Path=\//i,`Path=${prefix}/`));
     if(!transform){res.writeHead(r.statusCode || 502,outHeaders);r.pipe(res);return;}
     const chunks=[];r.on('data',c=>chunks.push(c));r.on('end',()=>{
-      const body=rewrite(Buffer.concat(chunks),type,prefix);
+      const body=rewrite(Buffer.concat(chunks),type,prefix,id);
       res.writeHead(r.statusCode || 502,{...outHeaders,'content-length':body.length});
       res.end(body);
     });
@@ -102,3 +105,4 @@ if(process.argv[1]===fileURLToPath(import.meta.url)){
   server.listen(port,'0.0.0.0',()=>console.log(`App Hub listening on :${port}`));
   for(const signal of ['SIGINT','SIGTERM']) process.on(signal,()=>server.close(async()=>{await closeApps();process.exit(0)}));
 }
+
