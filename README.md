@@ -75,3 +75,13 @@ CHROMIUM_PATH=/opt/pw-browsers/chromium npm run test:e2e   # browser E2E (omit C
 
 ## Docs
 [Ideation](docs/IDEATION.md) · [PRD](docs/PRD.md) · [Architecture, API & DB](docs/ARCHITECTURE.md) · [Test report](docs/TEST_REPORT.md) · [Deployment](docs/DEPLOYMENT.md) · [Roadmap](docs/ROADMAP.md)
+
+## Unified App Hub
+
+Run `npm start` to open a single hub at http://localhost:3000. The hub includes Hindsight and all 36 apps in `apps/`, with search, categories, favorites, and a return-to-hub link. Each app runs behind the same public port at `/apps/<name>/`; its SQLite database is stored separately under `DATA_DIR` (default `./data`). Set `ACCESS_PASSWORD` to protect the entire hub. Existing direct-run commands still work: `npm run start:hindsight` for Hindsight or `cd apps/<name> && npm start` for another app.
+
+For Docker or Render, deploy the repository root. The image copies all apps and the hub, and the persistent disk at `/data` holds the databases. The public health endpoint remains `/api/health`.
+
+### Android feasibility
+
+The hub is a responsive web app and can be packaged for Android as a Trusted Web Activity or WebView wrapper after deployment to an HTTPS domain. Its Node/SQLite backend must remain hosted; an offline-only APK would require a separate backend and data-storage port. A production Android release also needs an app icon, signed package, domain verification for TWA, and device testing.

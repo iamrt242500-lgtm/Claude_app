@@ -1,18 +1,20 @@
 {
   "name": "hindsight",
   "version": "1.0.0",
-  "description": "Decision journal with calibration analytics",
+  "description": "Unified app hub for 37 small apps",
   "type": "module",
   "private": true,
   "engines": {
     "node": ">=22.13"
   },
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node hub/server.js",
     "dev": "node --watch src/server.js",
-    "check": "node --check src/server.js && node --check src/db.js && node --check src/logic.js && node --check public/app.js",
+    "check": "node --check src/server.js && node --check src/db.js && node --check src/logic.js && node --check public/app.js && node --check hub/server.js && node --check hub/catalog.js && node --check hub/public/app.js",
     "test": "node --test \"test/*.test.js\"",
-    "test:e2e": "node e2e/e2e.mjs"
+    "test:e2e": "node e2e/e2e.mjs",
+    "start:hindsight": "node src/server.js",
+    "test:hub": "node --test hub/test/*.test.js"
   },
   "devDependencies": {
     "playwright": "^1.64.1"
