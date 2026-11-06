@@ -23,7 +23,8 @@ test('the hub serves and isolates every app on one public port', async () => {
       const page=await fetch(base+app.url);
       assert.equal(page.status,200,`${app.id} page`);
       const html=await page.text();
-      assert.match(html,/앱 허브/,`${app.id} return link`);
+      assert.match(html,/id="hub-shell-bar"/,`${app.id} shared header`);
+      assert.match(html,/class="hub-shell-all" href="\/"/,`${app.id} return link`);
       assert.match(html,new RegExp(`/apps/${app.id}/(?:app\\.js|styles?\\.css)`),`${app.id} asset path`);
       const script=await fetch(base+app.url+'app.js');
       assert.equal(script.status,200,`${app.id} script`);
